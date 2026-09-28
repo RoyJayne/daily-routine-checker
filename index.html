@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#f7f7f3" />
+  <title>Daily Routine</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="app-shell">
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">DAILY ROUTINE</p>
+        <h1>Today</h1>
+        <p id="todayDate" class="date"></p>
+      </div>
+
+      <button id="manageButton" class="secondary-button" type="button">
+        Manage routine
+      </button>
+    </header>
+
+    <section class="progress-card" aria-label="Daily progress">
+      <div class="progress-heading">
+        <div>
+          <p class="muted">Progress</p>
+          <strong id="progressText">0 / 0 complete</strong>
+        </div>
+        <strong id="progressPercent">0%</strong>
+      </div>
+
+      <div class="progress-track" aria-hidden="true">
+        <div id="progressBar" class="progress-bar"></div>
+      </div>
+    </section>
+
+    <section class="routine-section">
+      <div id="emptyState" class="empty-state hidden">
+        <h2>No routine yet</h2>
+        <p>Add the things you want to do every day.</p>
+        <button id="emptyAddButton" class="primary-button" type="button">
+          Add my routine
+        </button>
+      </div>
+
+      <div id="routineList" class="routine-list" aria-live="polite"></div>
+    </section>
+  </main>
+
+  <div id="modalBackdrop" class="modal-backdrop hidden" role="presentation">
+    <section class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="modal-header">
+        <div>
+          <p class="eyebrow">SETUP</p>
+          <h2 id="modalTitle">Manage your routine</h2>
+        </div>
+        <button id="closeModalButton" class="icon-button" type="button" aria-label="Close">
+          ×
+        </button>
+      </div>
+
+      <form id="taskForm" class="task-form">
+        <label for="taskInput">Add a daily task</label>
+        <div class="task-input-row">
+          <input
+            id="taskInput"
+            type="text"
+            maxlength="120"
+            placeholder="e.g. Study physics for 1 hour"
+            autocomplete="off"
+          />
+          <button class="primary-button" type="submit">Add</button>
+        </div>
+      </form>
+
+      <div class="manager-divider"></div>
+
+      <div>
+        <div class="manager-heading">
+          <h3>Your routine</h3>
+          <span id="routineCount" class="pill">0 tasks</span>
+        </div>
+        <div id="managerList" class="manager-list"></div>
+      </div>
+
+      <div class="manager-divider"></div>
+
+      <div class="import-export">
+        <div>
+          <h3>Backup</h3>
+          <p class="muted small">
+            Export your routine as a JSON file, or import it on another device.
+          </p>
+        </div>
+
+        <div class="button-row">
+          <button id="exportButton" class="secondary-button" type="button">
+            Export
+          </button>
+
+          <label class="secondary-button file-button">
+            Import
+            <input id="importInput" type="file" accept=".json,application/json" />
+          </label>
+        </div>
+      </div>
+
+      <p id="statusMessage" class="status-message" aria-live="polite"></p>
+    </section>
+  </div>
+
+  <template id="taskTemplate">
+    <button class="routine-item" type="button">
+      <span class="checkmark" aria-hidden="true">✓</span>
+      <span class="routine-item-content">
+        <span class="task-name"></span>
+        <span class="task-status">Not complete</span>
+      </span>
+    </button>
+  </template>
+
+  <template id="managerTaskTemplate">
+    <div class="manager-item">
+      <span class="manager-task-name"></span>
+      <div class="manager-actions">
+        <button class="move-button move-up" type="button" aria-label="Move task up">↑</button>
+        <button class="move-button move-down" type="button" aria-label="Move task down">↓</button>
+        <button class="delete-button" type="button">Delete</button>
+      </div>
+    </div>
+  </template>
+
+  <script src="app.js"></script>
+</body>
+</html>
